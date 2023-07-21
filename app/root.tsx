@@ -7,9 +7,9 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import type {Shop} from '@shopify/hydrogen/storefront-api-types';
 import styles from './styles/app.css';
 import favicon from '../public/favicon.svg';
+import {Layout} from './components/Layout';
 
 export const links: LinksFunction = () => {
   return [
@@ -27,12 +27,12 @@ export const links: LinksFunction = () => {
 };
 
 export async function loader({context}: LoaderArgs) {
-  const layout = await context.storefront.query<{shop: Shop}>(LAYOUT_QUERY);
+  const layout = await context.storefront.query(LAYOUT_QUERY);
   return {layout};
 }
 
 export default function App() {
-  const data = useLoaderData<typeof loader>();
+  const data = useLoaderData();
 
   const {name} = data.layout.shop;
 
@@ -45,9 +45,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <h1>Hello, {name}</h1>
-        <p>This is a custom storefront powered by Hydrogen</p>
-        <Outlet />
+        <Layout title={name}>
+          <Outlet />
+        </Layout>
         <ScrollRestoration />
         <Scripts />
       </body>
