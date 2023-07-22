@@ -11,6 +11,7 @@ import styles from './styles/app.css';
 import favicon from '../public/favicon.svg';
 import {Layout} from './components/Layout';
 import {Seo} from '@shopify/hydrogen';
+import {LAYOUT_QUERY} from './querys/layout';
 
 export const links: LinksFunction = () => {
   return [
@@ -23,7 +24,7 @@ export const links: LinksFunction = () => {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
-    {rel: 'icon', type: 'image/svg+xml', href: favicon},
+    {rel: 'icon', type: 'image/svg', href: favicon},
   ];
 };
 
@@ -56,12 +57,3 @@ export default function App() {
     </html>
   );
 }
-
-const LAYOUT_QUERY = `#graphql
-  query layout {
-    shop {
-      name
-      description
-    }
-  }
-`;
