@@ -12,8 +12,12 @@ export default function Product({product}: Props) {
     compareAtPrice && compareAtPrice.amount > price?.amount
   );
 
+  const onClick = () => {
+    alert('This feature will be availabe on the next version. Sorry 🥲');
+  };
+
   return (
-    <Section>
+    <Section onClick={onClick}>
       <StyledImage
         data={product.variants.nodes[0].image || {}}
         alt={product.title}
@@ -49,6 +53,11 @@ const Section = styled.section`
   padding: 2rem 1rem;
   height: 400px;
   width: 250px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #262e37;
+  }
 `;
 
 const StyledImage = styled(Image)`

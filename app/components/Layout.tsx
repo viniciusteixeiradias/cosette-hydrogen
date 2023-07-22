@@ -27,7 +27,7 @@ const AppLayout = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: #101418;
-  color: white;
+  color: #dedbd7;
   overflow-x: hidden;
 `;
 
