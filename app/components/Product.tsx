@@ -25,14 +25,11 @@ export default function Product({product}: Props) {
         <VendorName>{product.vendor}</VendorName>
 
         <ProductPrice>
-          <ProductCurrentPrice withoutTrailingZeros data={price} />
+          <ProductCurrentPrice data={price} />
           {hasDiscount && (
             <ProductDiscount>
               RRP:
-              <ProductPriceWithoutDiscount
-                withoutTrailingZeros
-                data={compareAtPrice}
-              />
+              <ProductPriceWithoutDiscount data={compareAtPrice} />
             </ProductDiscount>
           )}
         </ProductPrice>
@@ -61,6 +58,7 @@ const StyledImage = styled(Image)`
 const ProductDetails = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const ProductName = styled.span`

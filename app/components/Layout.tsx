@@ -28,7 +28,7 @@ const AppLayout = styled.div`
   width: 100vw;
   background-color: #101418;
   color: white;
-  overflow: hidden;
+  overflow-x: hidden;
 `;
 
 const AppBar = styled.div`
@@ -38,7 +38,7 @@ const AppBar = styled.div`
   height: 60px;
   font-size: 1.5rem;
   border-style: solid;
-  border-color: rgba(194, 224, 255, 0.08);
+  border-color: rgb(51, 55, 57);
   border-width: 0px 0px thin;
   background-color: rgba(16, 20, 24, 0.8);
 `;
@@ -53,8 +53,7 @@ const AppName = styled.a`
 `;
 
 const AppMain = styled.main`
-  height: calc(100vh - 60px);
   width: 100vw;
   display: flex;
-  overflow-x: auto;
+  justify-content: center;
 `;

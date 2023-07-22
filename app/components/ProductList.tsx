@@ -5,6 +5,7 @@ import {Collection} from '@shopify/hydrogen/storefront-api-types';
 import Product from './Product';
 import styled from '@emotion/styled';
 import Pagination from '@mui/material/Pagination';
+import CircularProgress from '@mui/material/CircularProgress';
 
 interface Props {
   collection: Collection;
@@ -13,10 +14,12 @@ interface Props {
 export default function ProductList({collection}: Props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState(collection.products.nodes || []);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetcher = useFetcher();
 
-  function fetchProducts(cursor: Maybe<string>) {
+  async function fetchProducts(cursor: Maybe<string>) {
+    setIsLoading(true);
     fetcher.load(`?index&cursor=${cursor}`);
   }
 
@@ -28,6 +31,7 @@ export default function ProductList({collection}: Props) {
     const {collection} = fetcher.data;
 
     setProducts([...collection.products.nodes]);
+    setIsLoading(false);
   }, [fetcher.data]);
 
   const click = (_: React.ChangeEvent<unknown>, page: number): void => {
@@ -42,8 +46,16 @@ export default function ProductList({collection}: Props) {
     setCurrentPage(page);
   };
 
+  if (isLoading) {
+    return (
+      <Loading>
+        <CircularProgress />
+      </Loading>
+    );
+  }
+
   return (
-    <section>
+    <>
       <ProductSection>
         {products.map((product) => (
           <Product key={product.id} product={product} />
@@ -55,7 +67,7 @@ export default function ProductList({collection}: Props) {
         color="primary"
         onChange={click}
       />
-    </section>
+    </>
   );
 }
 
@@ -69,9 +81,16 @@ const StyledPagination = styled(Pagination)`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 15px;
+  margin-block: 15px;
 
   & > ul > li > button {
     color: white;
   }
+`;
+
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `;

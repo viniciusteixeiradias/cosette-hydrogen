@@ -34,12 +34,20 @@ export async function loader({context, request}: Props) {
 export default function Collection() {
   const {collection} = useLoaderData();
   return (
-    <div>
+    <Section>
       <CategoryName>{collection.title}</CategoryName>
       <ProductList collection={collection} />
-    </div>
+    </Section>
   );
 }
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-block: 3rem;
+  min-width: 1180px;
+`;
 
 const CategoryName = styled.span`
   font-size: 1.5rem;
