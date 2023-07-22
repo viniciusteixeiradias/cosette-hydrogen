@@ -46,17 +46,13 @@ export default function Collection() {
   const {collection} = useLoaderData();
   return (
     <>
-      <header className="grid w-full gap-8 py-8 justify-items-start">
-        <h1 className="text-4xl whitespace-pre-wrap font-bold inline-block">
-          {collection.title}
-        </h1>
+      <header>
+        <h1>{collection.title}</h1>
 
         {collection.description && (
-          <div className="flex items-baseline justify-between w-full">
+          <div>
             <div>
-              <p className="max-w-md whitespace-pre-wrap inherit text-copy inline-block">
-                {collection.description}
-              </p>
+              <p>{collection.description}</p>
             </div>
           </div>
         )}
@@ -68,7 +64,7 @@ export default function Collection() {
     </>
   );
 }
-
+// Image, Vendor, Title, Price and Compare at price.
 const COLLECTION_QUERY = `#graphql
   query CollectionDetails($handle: String!, $cursor: String) {
     collection(handle: $handle) {
@@ -86,6 +82,7 @@ const COLLECTION_QUERY = `#graphql
           title
           publishedAt
           handle
+          vendor
           variants(first: 1) {
             nodes {
               id

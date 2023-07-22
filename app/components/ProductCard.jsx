@@ -7,28 +7,21 @@ export default function ProductCard({product}) {
 
   return (
     <Link to={`/products/${product.handle}`}>
-      <div className="grid gap-6">
-        <div className="shadow-sm rounded relative">
-          {isDiscounted && (
-            <p className="subpixel-antialiased absolute top-0 right-0 m-4 text-right text-notice text-red-600 text-xs">
-              Sale
-            </p>
-          )}
+      <div>
+        <div>
+          {isDiscounted && <p>Sale</p>}
           <Image data={product.variants.nodes[0].image} alt={product.title} />
         </div>
-        <div className="grid gap-1">
-          <h3 className="max-w-prose text-copy w-full overflow-hidden whitespace-nowrap text-ellipsis ">
-            {product.title}
-          </h3>
-          <div className="flex gap-4">
-            <span className="max-w-prose whitespace-pre-wrap inherit text-copy flex gap-4">
+        <div>
+          <h3>{product.title}</h3>
+          <div>
+            <span>{product.vendor}</span>
+          </div>
+          <div>
+            <span>
               <Money withoutTrailingZeros data={price} />
               {isDiscounted && (
-                <Money
-                  className="line-through opacity-50"
-                  withoutTrailingZeros
-                  data={compareAtPrice}
-                />
+                <Money withoutTrailingZeros data={compareAtPrice} />
               )}
             </span>
           </div>
