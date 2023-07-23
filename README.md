@@ -18,7 +18,7 @@
 **Requirements:**
 
 - Node.js version 16.14.0 or higher
-- [Pnpm](https://pnpm.io/) verison 7 or higher
+- [Pnpm](https://pnpm.io/) verison 7.28.0 or higher
 
 ```bash
 pnpm install
