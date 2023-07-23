@@ -9,7 +9,7 @@ interface Props {
 export default function Product({product}: Props) {
   const {price, compareAtPrice} = product.variants?.nodes[0] || {};
   const hasDiscount = !!(
-    compareAtPrice && compareAtPrice.amount > price?.amount
+    compareAtPrice && price && Number(compareAtPrice.amount) > Number(price.amount)
   );
 
   const onClick = () => {
