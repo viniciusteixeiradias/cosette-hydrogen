@@ -24,20 +24,23 @@ export default function ProductList({collection}: Props) {
   }
 
   useEffect(() => {
-    if (!fetcher.data) {
-      return;
+    try {
+      if (!fetcher.data) {
+        return;
+      }
+
+      const {collection} = fetcher.data;
+
+      setProducts([...collection.products.nodes]);
+    } finally {
+      setIsLoading(false);
     }
-
-    const {collection} = fetcher.data;
-
-    setProducts([...collection.products.nodes]);
-    setIsLoading(false);
   }, [fetcher.data]);
 
   const click = (_: React.ChangeEvent<unknown>, page: number): void => {
-    const isNextPage = page > currentPage;
+    const shouldGoToNextPage = page > currentPage;
 
-    if (isNextPage) {
+    if (shouldGoToNextPage) {
       fetchProducts(collection.products.pageInfo.endCursor);
     } else {
       fetchProducts(collection.products.pageInfo.startCursor);

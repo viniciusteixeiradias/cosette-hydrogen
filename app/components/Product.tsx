@@ -31,10 +31,9 @@ export default function Product({product}: Props) {
         <ProductPrice>
           <ProductCurrentPrice data={price} />
           {hasDiscount && (
-            <ProductDiscount>
-              RRP:
-              <ProductPriceWithoutDiscount data={compareAtPrice} />
-            </ProductDiscount>
+            <ProductOldPriceContent>
+              RRP: <ProductOldPrice data={compareAtPrice} />
+            </ProductOldPriceContent>
           )}
         </ProductPrice>
       </ProductDetails>
@@ -91,13 +90,13 @@ const ProductCurrentPrice = styled(Money)`
   font-size: 1.5rem;
 `;
 
-const ProductDiscount = styled.div`
+const ProductOldPriceContent = styled.div`
   display: flex;
   gap: 0.3rem;
   color: #b1aaa0;
 `;
 
-const ProductPriceWithoutDiscount = styled(Money)`
+const ProductOldPrice = styled(Money)`
   color: #b1aaa0;
   font-size: 1rem;
   text-decoration: line-through;

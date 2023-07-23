@@ -2,7 +2,7 @@ const SNOW_BOARD_COLLECTION_ID = 'gid://shopify/Collection/452209738006';
 const QUANTITY_FOR_PAGE = 10;
 
 const GET_SNOW_BOARD_COLLECTION = `#graphql
-query CollectionDetails($cursor: String) {
+query SnowBoardDetails($cursor: String) {
   collection(id: "${SNOW_BOARD_COLLECTION_ID}") {
     title
     products(first: ${QUANTITY_FOR_PAGE}, after: $cursor) {

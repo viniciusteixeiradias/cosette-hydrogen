@@ -26,9 +26,7 @@ export async function loader({context, request}: Props) {
     throw new Response(null, {status: 404});
   }
 
-  return json({
-    collection,
-  });
+  return json({collection});
 }
 
 export default function Collection() {
