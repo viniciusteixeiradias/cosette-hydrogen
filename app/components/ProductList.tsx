@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {Maybe} from 'graphql/jsutils/Maybe';
 import {useFetcher} from '@remix-run/react';
-import {Collection} from '@shopify/hydrogen/storefront-api-types';
+import {Collection, type Product as TProduct} from '@shopify/hydrogen/storefront-api-types';
 import Product from './Product';
 import styled from '@emotion/styled';
 import Pagination from '@mui/material/Pagination';
@@ -12,13 +12,13 @@ interface Props {
 }
 
 export default function ProductList({collection}: Props) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [products, setProducts] = useState(collection.products.nodes || []);
-  const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [products, setProducts] = useState<TProduct[]>(collection.products.nodes || []);
 
   const fetcher = useFetcher();
 
-  async function fetchProducts(cursor: Maybe<string>) {
+  const fetchProducts = async (cursor: Maybe<string>): Promise<void> => {
     setIsLoading(true);
     fetcher.load(`?index&cursor=${cursor}`);
   }
@@ -37,7 +37,7 @@ export default function ProductList({collection}: Props) {
     }
   }, [fetcher.data]);
 
-  const click = (_: React.ChangeEvent<unknown>, page: number): void => {
+  const onChangePage = (_: React.ChangeEvent<unknown>, page: number): void => {
     const shouldGoToNextPage = page > currentPage;
 
     if (shouldGoToNextPage) {
@@ -58,19 +58,17 @@ export default function ProductList({collection}: Props) {
   }
 
   return (
-    <>
+    <div>
       <ProductSection>
-        {products.map((product) => (
-          <Product key={product.id} product={product} />
-        ))}
+        {products.map((product) => <Product key={product.id} product={product} /> )}
       </ProductSection>
       <StyledPagination
         count={2}
         page={currentPage}
         color="primary"
-        onChange={click}
+        onChange={onChangePage}
       />
-    </>
+    </div>
   );
 }
 

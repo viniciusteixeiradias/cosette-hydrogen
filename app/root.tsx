@@ -11,6 +11,13 @@ import styles from './styles/app.css';
 import favicon from '../public/favicon.svg';
 import {Layout} from './components/Layout';
 import {LAYOUT_QUERY} from './querys/layout';
+import type { Shop } from '@shopify/hydrogen/storefront-api-types';
+
+interface Loader {
+  layout: {
+    shop: Shop
+  }
+}
 
 export const links: LinksFunction = () => {
   return [
@@ -19,8 +26,8 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export async function loader({context}: LoaderArgs) {
-  const layout = await context.storefront.query(LAYOUT_QUERY);
+export const loader = async ({context}: LoaderArgs): Promise<Loader> => {
+  const layout = await context.storefront.query<{shop: Shop}>(LAYOUT_QUERY);
   return {layout};
 }
 
