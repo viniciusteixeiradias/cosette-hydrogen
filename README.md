@@ -20,7 +20,7 @@
 - Node.js version 16.14.0 or higher
 
 ```bash
-npm install
+pnpm install
 ```
 
 Remember to update `.env` with your shop's domain and Storefront API token!
@@ -28,11 +28,11 @@ Remember to update `.env` with your shop's domain and Storefront API token!
 ## Building for production
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ## Local development
 
 ```bash
-npm run dev
+pnpm run dev
 ```
