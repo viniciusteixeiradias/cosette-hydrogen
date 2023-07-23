@@ -1,4 +1,4 @@
-# Vinicius Dias Cosette Code Challenge
+# Vinicius Dias Shopify Hydrogen
 
 ## What's included
 
