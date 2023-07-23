@@ -1,7 +1,10 @@
 import {useEffect, useState} from 'react';
 import {Maybe} from 'graphql/jsutils/Maybe';
 import {useFetcher} from '@remix-run/react';
-import {Collection, type Product as TProduct} from '@shopify/hydrogen/storefront-api-types';
+import {
+  Collection,
+  type Product as TProduct,
+} from '@shopify/hydrogen/storefront-api-types';
 import Product from './Product';
 import styled from '@emotion/styled';
 import Pagination from '@mui/material/Pagination';
@@ -14,14 +17,16 @@ interface Props {
 export default function ProductList({collection}: Props) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [products, setProducts] = useState<TProduct[]>(collection.products.nodes || []);
+  const [products, setProducts] = useState<TProduct[]>(
+    collection.products.nodes || [],
+  );
 
   const fetcher = useFetcher();
 
   const fetchProducts = async (cursor: Maybe<string>): Promise<void> => {
     setIsLoading(true);
     fetcher.load(`?index&cursor=${cursor}`);
-  }
+  };
 
   useEffect(() => {
     try {
@@ -60,7 +65,9 @@ export default function ProductList({collection}: Props) {
   return (
     <div>
       <ProductSection>
-        {products.map((product) => <Product key={product.id} product={product} /> )}
+        {products.map((product) => (
+          <Product key={product.id} product={product} />
+        ))}
       </ProductSection>
       <StyledPagination
         count={2}

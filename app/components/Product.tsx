@@ -8,8 +8,10 @@ interface Props {
 
 export default function Product({product}: Props) {
   const {price, compareAtPrice} = product.variants?.nodes[0] || {};
-  const hasDiscount: boolean = !!(
-    compareAtPrice && price && Number(compareAtPrice.amount) > Number(price.amount)
+  const hasDiscount = !!(
+    compareAtPrice &&
+    price &&
+    Number(compareAtPrice.amount) > Number(price.amount)
   );
 
   const onClick = (): void => {
